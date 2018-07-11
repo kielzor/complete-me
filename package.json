@@ -1,0 +1,17 @@
+{
+  "name": "boilerplate",
+  "version": "1.0.0",
+  "description": "Foundation boilerplate",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --require babel-core/register test",
+    "start": "webpack",
+    "eslint": "./node_modules/eslint/bin/eslint.js ./lib/*.js"
+  },
+  "author": "kd dehnert",
+  "license": "ISC"
+}

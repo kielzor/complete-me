@@ -14,11 +14,13 @@
   },
   "author": "kd dehnert",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "babel": "^6.23.0"
+  },
   "devDependencies": {
-    "babel": "^6.23.0",
     "babel-core": "^6.26.3",
     "chai": "^4.1.2",
+    "locus": "^2.0.1",
     "mocha": "^5.2.0"
   }
 }

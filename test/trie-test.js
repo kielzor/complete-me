@@ -14,12 +14,11 @@ describe('Trie', () => {
     expect(trie).to.exist;
   });
 
-  it('2. trie should create an empty root node', () => {
+  it('Should create an empty root node', () => {
     expect(trie.head.value).to.equal('')
   });
       
   describe('insert', () => {
-
     it('should be able to add a node to the Trie', () => {
       trie.insert('pizza');
       
@@ -28,7 +27,7 @@ describe('Trie', () => {
         .head
         .child.p
         .value
-        ).to.deep.equal('p');
+      ).to.deep.equal('p');
 
       expect(
         trie
@@ -36,7 +35,7 @@ describe('Trie', () => {
         .child.p
         .child.i
         .value
-        ).to.deep.equal('i');
+      ).to.deep.equal('i');
 
       expect(
         trie
@@ -45,10 +44,10 @@ describe('Trie', () => {
         .child.i
         .child.z
         .value
-        ).to.deep.equal('z');
+      ).to.deep.equal('z');
     });
 
-    it('Should move to a node if it already exists', () => {
+    it('Should not create a node if it already exists in the trie', () => {
       trie.insert('pizza');
       trie.insert('pineapple');
       trie.insert('pepper')
@@ -66,6 +65,14 @@ describe('Trie', () => {
 
       trie.insert('taco');
 
+      expect(
+        trie
+        .head
+        .child.t
+        .child.a
+        .isWord
+      ).to.equal(null)
+      
       expect(
         trie
         .head
@@ -122,7 +129,7 @@ describe('Trie', () => {
       expect(trie.find('PI')).to.deep.equal(['pizza', 'pineapple']);
     })
     
-    it('Should not suggest if the prefix does not include letters', () => {
+    it('Should not suggest a word if the prefix does not include all letters', () => {
       trie.insert('pizza');
       trie.insert('juice');
       trie.insert('taco');

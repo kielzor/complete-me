@@ -23,19 +23,52 @@ describe('Trie', () => {
     it('should be able to add a node to the Trie', () => {
       trie.insert('pizza');
       
-      expect(trie.head.child.p.value).to.deep.equal('p');
-      expect(trie.head.child.p.child.i.value).to.deep.equal('i');
+      expect(
+        trie
+        .head
+        .child.p
+        .value
+        ).to.deep.equal('p');
+
+      expect(
+        trie
+        .head
+        .child.p
+        .child.i
+        .value
+        ).to.deep.equal('i');
+
+      expect(
+        trie
+        .head
+        .child.p
+        .child.i
+        .child.z
+        .value
+        ).to.deep.equal('z');
     });
 
-    it('Should be able the value is a word', () => {
+    it('Should move to a node if it already exists', () => {
+      trie.insert('pizza');
+      trie.insert('pineapple');
+      trie.insert('pepper')
 
+      expect(Object.keys(trie.head.child)).to.deep.equal(['p'])
 
+      trie.insert('taco');
+      trie.insert('tater')
+
+      expect(Object.keys(trie.head.child)).to.deep.equal(['p', 't'])
+    })
+
+    it('Should be able to show the value is a word after it is entered', () => {
       expect(trie.head.child).to.deep.equal({});
 
       trie.insert('taco');
 
       expect(
-        trie.head
+        trie
+        .head
         .child.t
         .child.a
         .child.c
@@ -61,7 +94,13 @@ describe('Trie', () => {
       trie.insert('pizza');
       trie.insert('pizza');
 
-      expect(trie.count()).to.equal(1)
+      expect(trie.count()).to.equal(1);
+
+      trie.insert('pineapple');
+      trie.insert('taco');
+      trie.insert('pineapple');
+
+      expect(trie.count()).to.equal(3);
     });
   })
 
@@ -70,14 +109,28 @@ describe('Trie', () => {
       trie.insert('pizza');
       trie.insert('pineapple')
 
+      
       expect(trie.find('pi')).to.deep.equal(['pizza', 'pineapple']);
     });
 
+
+    it('Should not be case sensitive', () => {
+      trie.insert('PIZZA');
+      trie.insert('pineapple');
+
+      expect(trie.find('pi')).to.deep.equal(['pizza', 'pineapple']);
+      expect(trie.find('PI')).to.deep.equal(['pizza', 'pineapple']);
+    })
+    
     it('Should not suggest if the prefix does not include letters', () => {
       trie.insert('pizza');
-      trie.insert('juice')
-
-      expect(trie.find('pi')).to.deep.equal(['pizza']);
+      trie.insert('juice');
+      trie.insert('taco');
+      trie.insert('pineapple');
+      trie.insert('pepper');
+      trie.insert('pizzaria')
+      
+      expect(trie.find('pizz')).to.deep.equal(['pizza', 'pizzaria']);
     })
   })
 
@@ -88,7 +141,7 @@ describe('Trie', () => {
     it('Should populate the dictionary', () => {
       trie.populate(dictionary);
 
-      expect(trie.count()).to.equal(234371)
+      expect(trie.count()).to.equal(234371);
     })  
   })
 });
